@@ -24,5 +24,8 @@ public class Test{
 	private void print() {
 		System.out.println("\nTotal number of valid reports: " + processor.getCount());
 		System.out.println("Sum of valid results: " + processor.getSum());
+		
+		System.out.println("\nTotal number of valid reports with concatenation: " + processor.getCount2());
+		System.out.println("Sum of valid results with concatenation: " + processor.getSum2());
 	}
 }
