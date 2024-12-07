@@ -12,7 +12,9 @@ Welcome to my **Advent of Code 2024** repository! This is where I share my solut
 
 Each day contains:
 - `DayX_values.txt`: The puzzle input provided by Advent of Code.
-- `Test`: My Java implementation of the solution.
+- `Test`: My main class implementation of the solution.
+- `Reader`: My class used to extract the .txt file and save the information in a desired data structure.
+- `Processor`: My class to trigger other classes and effectuate processes
 - `README.md`: A brief explanation of the approach used to solve the day's challenge.
 
 ---
@@ -55,7 +57,7 @@ Each day contains:
 ---
 
 ## 🎅 About Me
-Hi! I’m Alec, an Information Engineering student at **HAW Hamburg** with a passion for coding, algorithms, and learning new concepts.
+Hi! I’m Alec, an Information Engineering student at **HAW Hamburg** with a passion for coding, piano and electronics.
 ---
 
 ## 🤝 Contributions
