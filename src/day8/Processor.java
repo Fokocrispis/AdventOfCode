@@ -1,15 +1,8 @@
 package day8;
 
 import java.awt.Point;
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-
-import java.awt.Point;
-import java.util.List;
-import java.util.Map;
-
-import java.awt.Point;
 import java.util.*;
 
 public class Processor {
