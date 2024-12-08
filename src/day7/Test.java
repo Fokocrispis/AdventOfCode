@@ -5,7 +5,6 @@ import java.util.List;
 
 import day6.Map;
 
-
 public class Test{
 	
 	private List<Report> data;
