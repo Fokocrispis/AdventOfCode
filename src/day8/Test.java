@@ -23,10 +23,6 @@ public class Test {
 	}
 	
 	private void print() {
-		   map.forEach((key, value) -> {
-		        System.out.println("Character: " + key);
-		        System.out.println("Positions: " + value);
-		    });
 		   System.out.println("Size: " + mapSize);
 	}
 }
