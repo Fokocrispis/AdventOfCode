@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Map {
-	private static int WAIT = 0;
+	private static int WAIT = 250;
 	private char[][] map;
 	private Guard guard;
 	private int col, rows;

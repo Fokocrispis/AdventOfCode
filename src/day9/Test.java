@@ -12,9 +12,9 @@ public class Test {
 	private Test(){
 	    reader = new Reader();
 		disk = new Disk(reader.readFromFile());
-//		print();
-		disk.orderDisk();
-//		print();
+		disk.orderDiskRefined();
+		print();
+		System.out.println("\n\n\nChecksum: " + disk.checkSum());
 	}
 	
 	public static void main(String[] arg){
@@ -22,11 +22,6 @@ public class Test {
 	}
 	
 	private void print() {
-		for(String s: disk.getDisk()) {
-			System.out.print(s);
-		}
-		
-		System.out.println();
 		
 		for(String s: disk.getProcessedDisk()) {
 			System.out.print(s);

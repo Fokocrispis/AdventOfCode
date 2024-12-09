@@ -31,7 +31,7 @@ public class Reader {
     public char[][] readMapFromFile() {
         List<char[]> lines = new ArrayList<>();
 
-        try (BufferedReader br = Files.newBufferedReader(Paths.get("./resources/Day6_values.txt"))) {
+        try (BufferedReader br = Files.newBufferedReader(Paths.get("./resources/Day6_test.txt"))) {
             String line;
             while ((line = br.readLine()) != null) {
                 lines.add(line.toCharArray());

@@ -6,11 +6,16 @@ import java.util.List;
 import java.util.ArrayList;
 import java.util.List;
 
+import java.util.*;
+
+import java.util.*;
+
+import java.util.*;
+
 public class Disk {
 
     private List<String> disk;
     private List<String> processedDisk = new ArrayList<>();
-    private List<Integer> zeros = new ArrayList<>();
     private List<String> blocks = new ArrayList<>();
     private int size;
 
@@ -18,66 +23,83 @@ public class Disk {
         this.disk = disk;
         this.size = disk.size();
         processDisk();
-        
     }
 
     private void processDisk() {
         int fileId = 0;
-        int zeroCounter = 0;
 
         for (int i = 0; i < size; i++) {
-            int blockCount = Integer.parseInt(disk.get(i)); 
+            int blockCount = Integer.parseInt(disk.get(i));
             if (blockCount == 0) continue;
 
-            if (i % 2 == 0){ 
+            if (i % 2 == 0) {
                 for (int j = 0; j < blockCount; j++) {
                     processedDisk.add(String.valueOf(fileId));
-                    blocks.add(String.valueOf(fileId));
-                    zeroCounter++;
                 }
+                blocks.add(String.valueOf(fileId));
                 fileId++;
-            } else { 
+            } else {
                 for (int j = 0; j < blockCount; j++) {
-                    processedDisk.add("."); 
-                    zeros.add(zeroCounter);
-                    zeroCounter++;
+                    processedDisk.add(".");
                 }
             }
         }
-        System.out.println(zeros);
-    }
-    
-    public void orderDisk() {
-        for (int i = 0; i < zeros.size(); i++) {
-            int zeroIndex = zeros.get(i);
-            String blockValue = blocks.get(blocks.size() - 1 - i); 
-            processedDisk.set(zeroIndex, blockValue);
-        }
-        for(int i = blocks.size(); i < processedDisk.size(); i++) {
-        	processedDisk.set(i, ".");
-        }
-        
-        System.out.println("\nSum: " + checkSum());
     }
 
-	private long checkSum() {
-		int count = 0;
-		long sum = 0;
-		for (String s : processedDisk) {
-			if (!s.contains(".")) {
-				sum += Integer.valueOf(s) * count;
-				count++;
-			}
-		}
-		return sum;
-	}
+    public void orderDiskRefined() {
+        for (int fileId = blocks.size() - 1; fileId >= 0; fileId--) {
+            String blockValue = String.valueOf(fileId);
+
+            int blockStart = processedDisk.indexOf(blockValue);
+            if (blockStart == -1) continue;
+
+            int blockSize = 0;
+            for (int i = blockStart; i < processedDisk.size() && processedDisk.get(i).equals(blockValue); i++) {
+                blockSize++;
+            }
+
+            int targetStart = findLeftmostSpan(blockSize, blockStart);
+            if (targetStart != -1 && targetStart < blockStart) {
+                for (int i = 0; i < blockSize; i++) {
+                    processedDisk.set(targetStart + i, blockValue);
+                }
+                for (int i = blockStart; i < blockStart + blockSize; i++) {
+                    processedDisk.set(i, ".");
+                }
+            }
+        }
+    }
+
+    private int findLeftmostSpan(int blockSize, int blockStart) {
+        int zeroStart = -1;
+        int zeroSpan = 0;
+
+        for (int i = 0; i < blockStart; i++) { 
+            if (processedDisk.get(i).equals(".")) {
+                if (zeroStart == -1) zeroStart = i;
+                zeroSpan++;
+                if (zeroSpan == blockSize) return zeroStart;
+            } else {
+                zeroStart = -1;
+                zeroSpan = 0;
+            }
+        }
+        return -1; 
+    }
+
+    public long checkSum() {
+        long sum = 0;
+        for (int i = 0; i < processedDisk.size(); i++) {
+            String block = processedDisk.get(i);
+            if (!block.equals(".")) {
+                sum += Integer.parseInt(block) * i;
+            }
+        }
+        return sum;
+    }
 
     public List<String> getProcessedDisk() {
         return processedDisk;
-    }
-
-    public List<String> getDisk() {
-        return disk;
     }
 }
 
