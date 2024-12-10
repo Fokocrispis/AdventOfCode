@@ -20,6 +20,12 @@ public class Test {
 			sum += new Hiker(map, p).calculateTrailheadScore();
 		}
 		System.out.println("Sum: " + sum);
+		sum = 0;
+		
+		for(Point p: reader.getZeros()) {
+			sum += new Hiker(map, p).calculateTrailheadVarianceScore();
+		}
+		System.out.println("Sum: " + sum);
 	}
 	
 	public static void main(String[] arg){

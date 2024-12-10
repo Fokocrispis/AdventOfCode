@@ -26,6 +26,10 @@ public class Hiker {
     public int calculateTrailheadScore() {
         return checkAround(currentPosition, new HashSet<>());
     }
+    
+    public int calculateTrailheadVarianceScore() {
+        return checkTrail(currentPosition);
+    }
 
     private int checkAround(Point pos, Set<Point> visited) {
         if (visited.contains(pos)) {
@@ -51,7 +55,29 @@ public class Hiker {
                 score += checkAround(neighbor, visited);
             }
         }
+        return score;
+    }
+    
+    private int checkTrail(Point pos) {
 
+        int currentValue = map.get(pos.y).get(pos.x);
+        if (currentValue == 9) {
+            return 1; 
+        }
+
+        int score = 0;
+        Point[] directions = {
+            new Point(pos.x, pos.y - 1), 
+            new Point(pos.x, pos.y + 1), 
+            new Point(pos.x - 1, pos.y), 
+            new Point(pos.x + 1, pos.y) 
+        };
+
+        for (Point neighbor : directions) {
+            if (isValid(neighbor, currentValue)) {
+                score += checkTrail(neighbor);
+            }
+        }
         return score;
     }
 
