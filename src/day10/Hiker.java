@@ -28,7 +28,7 @@ public class Hiker {
     }
     
     public int calculateTrailheadVarianceScore() {
-        return checkTrail(currentPosition);
+        return checkAroundVariants(currentPosition);
     }
 
     private int checkAround(Point pos, Set<Point> visited) {
@@ -58,7 +58,7 @@ public class Hiker {
         return score;
     }
     
-    private int checkTrail(Point pos) {
+    private int checkAroundVariants(Point pos) {
 
         int currentValue = map.get(pos.y).get(pos.x);
         if (currentValue == 9) {
@@ -75,7 +75,7 @@ public class Hiker {
 
         for (Point neighbor : directions) {
             if (isValid(neighbor, currentValue)) {
-                score += checkTrail(neighbor);
+                score += checkAroundVariants(neighbor);
             }
         }
         return score;

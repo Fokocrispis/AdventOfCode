@@ -19,13 +19,13 @@ public class Test {
 		for(Point p: reader.getZeros()) {
 			sum += new Hiker(map, p).calculateTrailheadScore();
 		}
-		System.out.println("Sum: " + sum);
+		System.out.println("\nSum: " + sum);
 		sum = 0;
 		
 		for(Point p: reader.getZeros()) {
 			sum += new Hiker(map, p).calculateTrailheadVarianceScore();
 		}
-		System.out.println("Sum: " + sum);
+		System.out.println("Variants sum: " + sum);
 	}
 	
 	public static void main(String[] arg){
@@ -38,10 +38,6 @@ public class Test {
 				System.out.print(i);
 			}
 			System.out.println();
-		}
-		
-		for(Point p: reader.getZeros()) {
-			System.out.println(p);
 		}
 		
 		System.out.println("Columns: " + reader.getColumns() + ", Rows: " + reader.getRows());
