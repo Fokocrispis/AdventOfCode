@@ -35,10 +35,6 @@ public class Reader {
                     isReadingEnabled = true;
                     System.out.println("do() command detected - Enabling future mul() commands");
                     buffer.setLength(0); 
-//                } else if (buffer.toString().contains("don't()")) {
-//                    isReadingEnabled = false;
-//                    System.out.println("don't() command detected - Disabling future mul() commands");
-//                    buffer.setLength(0);
                 } else {
                     Matcher matcher = mulPattern.matcher(buffer.toString());
                     if (matcher.find() && isReadingEnabled) {
