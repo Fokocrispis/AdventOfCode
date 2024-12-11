@@ -1,59 +1,59 @@
 package day11;
 
-import java.util.HashMap;
 import java.util.Map;
-
-import java.util.concurrent.*;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Stone {
-    private static final int LOOPS = 25;
+    public static final int LOOPS = 75 - 1;
     private static final int MULT = 2024;
 
-    private static final Map<Long, long[]> memoizedSplits = new ConcurrentHashMap<>();
-    private static final Map<Long, Long> memoizedMultiplications = new ConcurrentHashMap<>();
-    private static final Map<Long, long[]> memoizedResults = new ConcurrentHashMap<>();
+    private static final Map<String, Long> memo = new ConcurrentHashMap<>();
 
-    private int recursiveCount = 0;
     private long value;
+    private int startCount;
 
-    public Stone(long value, int count, Test test) {
+    public Stone(long value, int startCount) {
         this.value = value;
-        this.recursiveCount = count + 1;
-
-        processStone(value, test, recursiveCount);
+        this.startCount = startCount;
     }
 
-    private void processStone(long currentValue, Test test, int currentCount) {
+    public long getCount() {
+        return processStone(value, startCount);
+    }
+
+    private long processStone(long currentValue, int currentCount) {
         if (currentCount > LOOPS) {
-            test.increaseCount();
-            return;
+            return 1;
         }
 
-        long[] memoized = memoizedResults.get(currentValue);
-        if (memoized != null) {
-            for (long result : memoized) {
-                processStone(result, test, currentCount + 1);
-            }
-            return;
+        String key = currentValue + "-" + currentCount;
+        Long memoizedResult = memo.get(key);
+        if (memoizedResult != null) {
+            return memoizedResult;
         }
 
-        if (currentValue == 0) {
-            memoizedResults.put(currentValue, new long[]{1L});
-            processStone(1, test, currentCount + 1);
-        } else if (String.valueOf(currentValue).length() % 2 == 0) {
-            long[] splitValues = memoizedSplits.computeIfAbsent(currentValue, this::split);
-            memoizedResults.put(currentValue, splitValues);
-            for (long result : splitValues) {
-                processStone(result, test, currentCount + 1);
-            }
+        long resultCount;
+        if (currentValue == 0L) {
+            resultCount = processStone(1L, currentCount + 1);
+        } else if (hasEvenNumberOfDigits(currentValue)) {
+            long[] splitVals = splitNumber(currentValue);
+            long leftCount = processStone(splitVals[0], currentCount + 1);
+            long rightCount = processStone(splitVals[1], currentCount + 1);
+            resultCount = leftCount + rightCount;
         } else {
-            long multipliedValue = memoizedMultiplications.computeIfAbsent(currentValue, v -> v * MULT);
-            memoizedResults.put(currentValue, new long[]{multipliedValue});
-            processStone(multipliedValue, test, currentCount + 1);
+            long multiplied = currentValue * MULT;
+            resultCount = processStone(multiplied, currentCount + 1);
         }
+        memo.put(key, resultCount);
+        return resultCount;
     }
 
-    private long[] split(long value) {
+    private boolean hasEvenNumberOfDigits(long value) {
+        int length = Long.toString(value).length();
+        return (length % 2 == 0);
+    }
+
+    private long[] splitNumber(long value) {
         int length = (int) Math.log10(value) + 1;
         int halfLength = length / 2;
 
@@ -61,6 +61,8 @@ public class Stone {
         return new long[]{value / divisor, value % divisor};
     }
 }
+
+
 
 
 
