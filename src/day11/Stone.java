@@ -26,7 +26,7 @@ public class Stone {
             return 1;
         }
 
-        String key = currentValue + "-" + currentCount;
+        String key = currentValue + " | " + currentCount;
         Long memoizedResult = memo.get(key);
         if (memoizedResult != null) {
             return memoizedResult;
