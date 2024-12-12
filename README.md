@@ -22,17 +22,17 @@ Each day contains:
 ## 🌟 Progress Tracker
 | Day | Part 1 | Part 2 | Notes                      |
 |-----|--------|--------|----------------------------|
-| 1   | ✅      | ✅      |                           |
-| 2   | ✅      | ✅      |                           |
-| 3   | ✅      | ✅      |                           |
+| 1   | ✅      | ✅      | Build up the file reader  |
+| 2   | ✅      | ✅      | Defined file structure    |
+| 3   | ✅      | ✅      | Test data -> Real data    |
 | 4   | ✅      | ✅      |                           |
 | 5   | ✅      | ✅      |                           |
-| 6   | ✅      | ❌      |                           |
-| 7   | ✅      | ✅      |                           |
+| 6   | ✅      | ❌      | Pacman doesnt want to loop|
+| 7   | ✅      | ✅      | Cleanest solution so far  |
 | 8   | ✅      | ✅      |                           |
 | 9   | ✅      | ✅      |                           |
-| 10  | ✅      | ✅      |                           |
-| 11  | ❌      | ❌      |                           |
+| 10  | ✅      | ✅      | Focused more on recursion |
+| 11  | ✅      | ✅      | Multithreaded memoization |
 | 12  | ❌      | ❌      |                           |
 | 13  | ❌      | ❌      |                           |
 | 14  | ❌      | ❌      |                           |
