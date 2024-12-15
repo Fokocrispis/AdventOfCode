@@ -41,6 +41,20 @@ public class Processor {
             }
 
             neighbours.put(c, totalCostForChar);
+            
+            
+            for (Set<Point> region : regions) {
+                int area = region.size();
+                int perimeter = computePerimeter(region);
+                int corners = computeCorners(region);  // New line
+
+                int cost = area * perimeter; // Existing calculation
+                totalCostForChar += cost;
+
+                // If you want to print corners or use them somehow:
+                System.out.println("Area: " + area + ", Perimeter: " + perimeter + ", Corners: " + corners);
+            }
+
         }
     }
 
@@ -88,14 +102,49 @@ public class Processor {
         int perimeter = 0;
         for (Point p : region) {
             int localPerimeter = 4;
-            if (region.contains(new Point(p.x, p.y - 1))) localPerimeter--;
-            if (region.contains(new Point(p.x, p.y + 1))) localPerimeter--;
-            if (region.contains(new Point(p.x - 1, p.y))) localPerimeter--;
-            if (region.contains(new Point(p.x + 1, p.y))) localPerimeter--;
+            if (region.contains(new Point(p.x, p.y - 1))) 
+            	localPerimeter--;
+            if (region.contains(new Point(p.x, p.y + 1))) 
+            	localPerimeter--;
+            if (region.contains(new Point(p.x - 1, p.y))) 
+            	localPerimeter--;
+            if (region.contains(new Point(p.x + 1, p.y))) 
+            	localPerimeter--;
             perimeter += localPerimeter;
         }
         return perimeter;
     }
+    
+    private int computeCorners(Set<Point> region) {
+        int corners = 0;
+
+        for (Point p : region) {
+            boolean up = region.contains(new Point(p.x, p.y - 1));
+            boolean down = region.contains(new Point(p.x, p.y + 1));
+            boolean left = region.contains(new Point(p.x - 1, p.y));
+            boolean right = region.contains(new Point(p.x + 1, p.y));
+
+            // Count how many neighbors this point has
+            int neighborCount = 0;
+            if (up) neighborCount++;
+            if (down) neighborCount++;
+            if (left) neighborCount++;
+            if (right) neighborCount++;
+
+            // Check if it is a corner: exactly two neighbors forming an L-shape
+            if (neighborCount == 2) {
+                // Check L-shape configurations
+                // Up-Left, Up-Right, Down-Left, Down-Right
+                if ((up && left) || (up && right) ||
+                    (down && left) || (down && right)) {
+                    corners++;
+                }
+            }
+        }
+
+        return corners;
+    }
+
 
     public int sum() {
         int sum = 0;

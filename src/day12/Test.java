@@ -18,7 +18,7 @@ public class Test {
         print();
         processor = new Processor(map);
         System.out.println("Sum of costs: " + processor.sum());
-        
+      
     }
     
     public static void main(String[] arg) {
