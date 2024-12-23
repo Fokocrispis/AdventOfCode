@@ -13,9 +13,9 @@ public class Reader {
     private static final Path PATH = Paths.get("./resources/Day13_values.txt");
     private static final long PRIZE_OFFSET = 10000000000000L; 
 
-    private final List<int[][]> matrices; // Stores multiple 2x2 coefficient matrices
-    private final List<long[]> results;   // Stores corresponding result vectors
-    private long totalTokens = 0; // Tracks total tokens spent
+    private final List<int[][]> matrices; 
+    private final List<long[]> results;   
+    private long totalTokens = 0; 
 
     public Reader() {
         matrices = new ArrayList<>();
@@ -72,22 +72,19 @@ public class Reader {
     public long[] solveSystem(int[][] matrix, long[] result) {
         long determinant = (long) matrix[0][0] * matrix[1][1] - (long) matrix[0][1] * matrix[1][0];
         if (determinant == 0) {
-            return null; // Matrix is not invertible
+            return null; 
         }
 
-        // Calculate adjugate and divide by determinant
         long adj00 = matrix[1][1];
         long adj01 = -matrix[0][1];
         long adj10 = -matrix[1][0];
         long adj11 = matrix[0][0];
 
-        // Multiply adjugate by result vector
         long xNumerator = adj00 * result[0] + adj01 * result[1];
         long yNumerator = adj10 * result[0] + adj11 * result[1];
 
-        // Ensure the solution divides cleanly (integers only)
         if (xNumerator % determinant != 0 || yNumerator % determinant != 0) {
-            return null; // No integer solution
+            return null; 
         }
 
         return new long[]{xNumerator / determinant, yNumerator / determinant};
@@ -113,7 +110,6 @@ public class Reader {
                 System.out.println("Solution (Button Presses):");
                 System.out.printf("A = %d, B = %d%n", solution[0], solution[1]);
 
-                // Calculate and accumulate token cost
                 long tokenCost = solution[0] * 3 + solution[1] * 1;
                 totalTokens += tokenCost;
                 System.out.printf("Tokens Spent: %d%n%n", tokenCost);
