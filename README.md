@@ -33,8 +33,8 @@ Each day contains:
 | 9   | ✅      | ✅      |                           |
 | 10  | ✅      | ✅      | Focused more on recursion |
 | 11  | ✅      | ✅      | Multithreaded memoization |
-| 12  | ❌      | ❌      |                           |
-| 13  | ❌      | ❌      |                           |
+| 12  | ✅      | ❌      |                           |
+| 13  | ✅      | ✅      |                           |
 | 14  | ❌      | ❌      |                           |
 | 15  | ❌      | ❌      |                           |
 | 16  | ❌      | ❌      |                           |
